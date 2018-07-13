@@ -1,0 +1,22 @@
+uri: 'https://github.com/at-wat/alpine-ros-sources/raw/master/log4cxx/logging-log4cxx.tar.gz'
+md5sum: 0713afaa6376f9d5dc9eb100df5e6c8e
+install-script: |
+  #!/bin/sh
+  set -o errexit
+  apk add --no-cache --virtual=.build-deps apr-dev apr-util-dev autoconf automake libtool gcc g++ musl-dev make
+  ./autogen.sh
+  ./configure --prefix=/usr
+  make
+  make install
+  apk del --no-cache .build-deps
+check-presence-script: |
+  #!/bin/sh
+  if [ ! -f /usr/lib/pkgconfig/liblog4cxx.pc ]
+  then
+    echo "log4cxx-sourcedep not installed"
+    exit 1
+  else
+    exit 0
+  fi
+exec-path: logging-log4cxx
+depends: []
