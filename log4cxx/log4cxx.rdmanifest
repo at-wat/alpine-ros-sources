@@ -5,7 +5,7 @@ install-script: |
   set -o errexit
   apk add --no-cache --virtual=.build-deps apr-dev apr-util-dev autoconf automake libtool gcc g++ musl-dev make
   ./autogen.sh
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr CFLAGS="-Os" CXXFLAGS="-Os"
   make
   make install
   apk del --no-cache .build-deps

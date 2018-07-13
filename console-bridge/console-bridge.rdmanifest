@@ -4,7 +4,7 @@ install-script: |
   #!/bin/sh
   set -o errexit
   apk add --no-cache --virtual=.build-deps cmake g++ musl-dev make cmake
-  cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib
+  cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_BUILD_TYPE=Release
   make
   make install
   apk del --no-cache .build-deps
